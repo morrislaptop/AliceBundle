@@ -86,7 +86,7 @@ class TestLoader extends DataFixtureLoader
     {
         return  array(
             __DIR__ . '/test.yml',
-
+            'Acme\\Bundle\\AcmeBundle\\Entity\\Prize' => __DIR__.'/prizes.csv'
         );
     }
 }

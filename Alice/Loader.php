@@ -88,13 +88,13 @@ class Loader
      */
     public function load(array $files)
     {
-        /** @var $loader \Nelmio\Alice\Loader\Base */
-        $loader = $this->getLoader('yaml');
-        $loader->setProviders($this->providers);
-
         $objects = array();
-        foreach ($files as $file) {
-            $set = $loader->load($file);
+        foreach ($files as $entity => $file) {
+            /** @var $loader \Nelmio\Alice\Loader\Base */
+            $loader = $this->getLoader(pathinfo($file, PATHINFO_EXTENSION));
+            $loader->setProviders($this->providers);
+
+            $set = $loader->load($file, $entity);
             $this->persist($set);
 
             $objects = array_merge($objects, $set);
