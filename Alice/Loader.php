@@ -91,8 +91,10 @@ class Loader
         $objects = array();
         foreach ($files as $entity => $file) {
             /** @var $loader \Nelmio\Alice\Loader\Base */
+            $lastReferences = empty($loader) ? array() : $loader->getReferences();
             $loader = $this->getLoader(pathinfo($file, PATHINFO_EXTENSION));
             $loader->setProviders($this->providers);
+            $loader->setReferences($lastReferences);
 
             $set = $loader->load($file, $entity);
             $this->persist($set);
